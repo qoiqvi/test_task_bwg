@@ -1,0 +1,27 @@
+.AppLink {
+	font-size: 16px;
+	line-height: 24px;
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.primary {
+	color: rgb(73, 73, 175);
+}
+
+.secondary {
+	color: var(--secondary-color);
+}
+
+.red {
+	color: red;
+}
+
+.inverted_secondary {
+	color: var(--inverted-secondary-color);
+}
+
+.inverted_primary {
+	color: var(--inverted-primary-color);
+}

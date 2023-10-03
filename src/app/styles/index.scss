@@ -1,2 +1,11 @@
 @import "./reset";
 @import "./variables/global";
+
+* {
+	font: var(--font-main);
+}
+
+.app {
+	min-height: 100vh;
+	background: var(--bg-color);
+}

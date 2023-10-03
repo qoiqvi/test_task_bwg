@@ -1,18 +1,24 @@
 :root {
 	// typography
-	--font-family: "Montserrat", sans-serif;
-	--font-family-title: "Bebas Neue", sans-serif;
+	--font-family: "Helvetica", "Montserrat", sans-serif;
 	--font-size-m: 12px;
-	--font-line-m: 20px;
+	--font-line-m: 16px;
 	--font-size-l: 20px;
 	--font-line-l: 24px;
 	--font-size-xl: 34px;
-	--font-line-xl: 42px;
+	--font-line-xl: 38px;
 	--font-main: var(--font-size-m) / var(--font-line-m) var(--font-family);
 	--font-large: var(--font-size-l) / var(--font-line-l) var(--font-family);
 	--font-xlarge: var(--font-size-xl) / var(--font-line-xl) var(--font-family);
-	font: var(--font-xl);
 
 	// размеры
 	--navbar-height: 60px;
+
+	// цвета
+	--accent-color: #aee7ff;
+	--bg-color: #f1f1f1;
+	--border-color: #575757;
+	--header-cell-color: #c9c9c9;
+	--first-cell-color: #d7f3ff;
+	--second-cell-color: #fff;
 }

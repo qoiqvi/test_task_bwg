@@ -1,0 +1,11 @@
+.Navbar {
+	height: var(--navbar-height);
+	background-color: var(--accent-color);
+	display: flex;
+	width: 100vw;
+	align-items: center;
+}
+
+.text {
+	margin-left: 40px;
+}
