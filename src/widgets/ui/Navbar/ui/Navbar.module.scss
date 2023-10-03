@@ -1,0 +1,16 @@
+.Navbar {
+	height: var(--navbar-height);
+	background-color: var(--brand-mts-red);
+	display: flex;
+	align-items: center;
+	// justify-content: center;
+}
+
+.text {
+	margin-left: 40px;
+}
+
+.parseBtn {
+	margin-left: auto;
+	margin-right: 15px;
+}
