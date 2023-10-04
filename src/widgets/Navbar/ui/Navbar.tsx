@@ -1,8 +1,7 @@
 import { classNames } from "shared/lib/classNames/classNames"
 import cls from "./Navbar.module.scss"
 import { memo } from "react"
-import { Text } from "shared/ui/Text"
-import { useAppSelector } from "shared/hooks/useAppSelector"
+import { AppLink } from "shared/ui/Link"
 
 export interface NavbarProps {
 	className?: string
@@ -10,12 +9,30 @@ export interface NavbarProps {
 
 export const Navbar = memo((props: NavbarProps) => {
 	const { className } = props
-	const state = useAppSelector((state) => state)
-	console.log(state)
+
 	return (
 		<div className={classNames(cls.Navbar, {}, [className])}>
-			<Text text={"Главная"} />
-			<Text text={"Главная"} />
+			<div className={cls.infoContainer}>
+				<AppLink
+					to={"/"}
+					className={cls.link}
+				>
+					Домой
+				</AppLink>
+				<AppLink
+					to={"https://github.com/qoiqvi"}
+					target="_blank"
+					className={cls.dimitri}
+				>
+					dmitrivasch
+				</AppLink>
+				<AppLink
+					className={cls.link}
+					to={"/"}
+				>
+					Выйти
+				</AppLink>
+			</div>
 		</div>
 	)
 })

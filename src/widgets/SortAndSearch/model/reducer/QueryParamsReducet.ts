@@ -1,9 +1,5 @@
-import { Action, QueryParamsStateSchema, SortOrder } from "../types/QueryParamsStateSchema"
-
-const CHANGE_ORDER = "CHANGE_ORDER"
-const CHANGE_SORT = "CHANGE_SORT"
-const CHANGE_PAGE = "CHANGE_PAGE"
-const CHANGE_TITLE = "CHANGE_TITLE"
+import { ActionTypes } from "../actions"
+import { Action, QueryParamsStateSchema } from "../types/QueryParamsStateSchema"
 
 const initialState: QueryParamsStateSchema = {
 	order: "desc",
@@ -15,14 +11,14 @@ const initialState: QueryParamsStateSchema = {
 
 export const QueryParamsReducer = (state = initialState, action: Action): QueryParamsStateSchema => {
 	switch (action.type) {
-		case CHANGE_ORDER:
-			return { ...state, order: action.payload as SortOrder }
-		case CHANGE_TITLE:
-			return state
-		case CHANGE_SORT:
-			return state
-		case CHANGE_PAGE:
-			return state
+		case ActionTypes.CHANGE_ORDER:
+			return { ...state, order: action.payload }
+		case ActionTypes.CHANGE_TITLE:
+			return { ...state, title: action.payload }
+		case ActionTypes.CHANGE_SORT:
+			return { ...state, sort: action.payload }
+		case ActionTypes.CHANGE_PAGE:
+			return { ...state, page: action.payload }
 		default:
 			return state
 	}

@@ -9,9 +9,9 @@ const container = document.getElementById("root")
 const root = createRoot(container as HTMLElement)
 
 root.render(
-	<Provider store={store}>
-		<BrowserRouter>
+	<BrowserRouter>
+		<Provider store={store}>
 			<App />
-		</BrowserRouter>
-	</Provider>
+		</Provider>
+	</BrowserRouter>
 )

@@ -1,15 +1,8 @@
+import { User } from "entities/User"
+
 export interface ShortQuestion {
 	tags: string[]
-	owner: {
-		account_id: number
-		reputation: number
-		user_id: number
-		user_type: string
-		accept_rate: number
-		profile_image: string
-		display_name: string
-		link: string
-	}
+	owner: User
 	is_answered: boolean
 	view_count: number
 	accepted_answer_id: number | null
@@ -21,4 +14,8 @@ export interface ShortQuestion {
 	content_license: string
 	link: string
 	title: string
+}
+
+export interface Question extends ShortQuestion {
+	body: string
 }

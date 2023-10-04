@@ -1,1 +1,1 @@
-export { ShortQuestion } from "./model/types/index"
+export type { ShortQuestion, Question } from "./model/types/index"

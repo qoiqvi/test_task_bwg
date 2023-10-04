@@ -14,3 +14,12 @@ declare module "*.svg" {
 	const SVG: React.VFC<React.SVGProps<SVGSVGElement>>
 	export default SVG
 }
+
+type OptionalRecord<K extends keyof any, T> = {
+	[P in K]?: T
+}
+
+interface SelectOptions {
+	value?: string
+	content?: string
+}

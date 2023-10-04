@@ -1,7 +1,17 @@
+import { ShortQuestion } from "entities/Question"
 import { Api } from "shared/api"
+import { Data } from "shared/types/Data"
 import { QueryParamsStateSchema } from "widgets/SortAndSearch"
 
-export async function fetchQuestionsByParams(params: QueryParamsStateSchema, setIsLoading: (arg: boolean) => void) {
+interface fetchQuestionsByParamsProps {
+	params: QueryParamsStateSchema
+	setIsLoading: (arg: boolean) => void
+}
+
+export async function fetchQuestionsByParams({
+	params,
+	setIsLoading,
+}: fetchQuestionsByParamsProps): Promise<Data<ShortQuestion>> {
 	const { order, page, pagesize, sort, title } = params
 	setIsLoading(true)
 	try {
@@ -16,11 +26,12 @@ export async function fetchQuestionsByParams(params: QueryParamsStateSchema, set
 			},
 		})
 
-		console.log(data)
-		console.log(data.data.items)
+		if (!data) {
+			throw new Error()
+		}
 
-		return data.data.items
-	} catch (error) {
+		return data.data
+	} catch (error: any) {
 		console.error(error)
 		return error
 	} finally {

@@ -1,2 +1,4 @@
+export { SortAndSearch } from "./ui/SortAndSearch"
 export { QueryParamsReducer } from "./model/reducer/QueryParamsReducet"
-export { QueryParamsStateSchema } from "./model/types/QueryParamsStateSchema"
+export { QueryParamsStateSchema, SortBy, SortOrder } from "./model/types/QueryParamsStateSchema"
+export { changeOrder, changePage, changeSort, changeTitle } from "./model/actions"

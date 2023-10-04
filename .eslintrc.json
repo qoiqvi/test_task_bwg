@@ -68,7 +68,8 @@
         "@typescript-eslint/restrict-template-expressions": 0,
         "@typescript-eslint/consistent-type-imports": 0,
         "@typescript-eslint/member-delimiter-style": 0,
-        "react/react-in-jsx-scope": 0
+        "react/react-in-jsx-scope": 0,
+        "no-mixed-spaces-and-tabs": 0
     },
     "globals": {
         "_IS_DEV_": true
