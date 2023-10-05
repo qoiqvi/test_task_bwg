@@ -11,10 +11,8 @@ import { sklonenie } from "../model/utils/sklonenie/sklonenie"
 import { Avatar } from "shared/ui/Avatar"
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll/useInfiniteScroll"
 import { fetchNexthQuestions } from "../model/services/fetchNextQuestions"
-import { Spinner } from "shared/ui/Spinner"
 import parser from "html-react-parser"
 import { useDispatch } from "react-redux"
-import { changePage } from "widgets/SortAndSearch"
 
 export interface QuestionsTableProps {
 	className?: string
@@ -31,12 +29,12 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 	const dispatch = useDispatch()
 
 	const onScrollEnd = useCallback(() => {
-		if (!isLoading) {
+		if (!isLoading && hasMore && questions.length) {
 			fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
 				setQuestions((prev) => [...prev, ...data.items])
 			)
 		}
-	}, [isLoading, params])
+	}, [isLoading, params, questions.length])
 
 	useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
 
@@ -102,11 +100,11 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 					</tbody>
 				</table>
 			</div>
-			{/* <div
+			<div
 				style={{ display: isLoading ? "none" : "block" }}
 				className={cls.trigger}
 				ref={triggerRef}
-			/> */}
+			/>
 		</div>
 	)
 })

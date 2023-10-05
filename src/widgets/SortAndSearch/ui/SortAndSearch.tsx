@@ -20,7 +20,7 @@ export const SortAndSearch = memo((props: SortAndSearchProps) => {
 		<div className={classNames(cls.SortAndSearch, {}, [className])}>
 			<SortBlock />
 			<SearchBlock className={cls.search} />
-			<Button onClick={() => dispatch(changePage(page + 1))}>Следующая</Button>
+			{/* <Button onClick={() => dispatch(changePage(page + 1))}>Следующая</Button> */}
 		</div>
 	)
 })
