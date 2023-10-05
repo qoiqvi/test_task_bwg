@@ -28,15 +28,15 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 	const params = useAppSelector((state) => state.queryParams)
 	const dispatch = useDispatch()
 
-	const onScrollEnd = useCallback(() => {
-		if (!isLoading && hasMore && questions?.length) {
-			fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
-				setQuestions((prev) => [...prev, ...data.items])
-			)
-		}
-	}, [isLoading, params, questions.length])
+	// const onScrollEnd = useCallback(() => {
+	// 	if (!isLoading && hasMore && questions?.length) {
+	// 		fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
+	// 			setQuestions((prev) => [...prev, ...data.items])
+	// 		)
+	// 	}
+	// }, [isLoading, params, questions.length])
 
-	useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
+	// useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
 
 	useEffect(() => {
 		fetchQuestionsByParams({ params, setIsLoading }).then((data) => {
