@@ -29,7 +29,7 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 	const dispatch = useDispatch()
 
 	const onScrollEnd = useCallback(() => {
-		if (!isLoading && hasMore && questions.length) {
+		if (!isLoading && hasMore && questions?.length) {
 			fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
 				setQuestions((prev) => [...prev, ...data.items])
 			)
