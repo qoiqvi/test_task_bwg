@@ -21,7 +21,7 @@ export async function fetchQuestionsByParams({
 				sort,
 				title,
 				pagesize,
-				page,
+				page: 1,
 				filter: "!0Xl1gtmW(_BbDPGUp1Z8NFfdi",
 			},
 		})

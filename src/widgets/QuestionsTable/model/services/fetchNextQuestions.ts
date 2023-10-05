@@ -11,7 +11,7 @@ interface fetchNextQuestionsProps {
 export async function fetchNexthQuestions({ params, hasMore, isLoading, setIsLoading }: fetchNextQuestionsProps) {
 	try {
 		if (hasMore && !isLoading) {
-			fetchQuestionsByParams({ params, setIsLoading })
+			return fetchQuestionsByParams({ params, setIsLoading })
 		}
 	} catch (error: any) {
 		console.error(error)

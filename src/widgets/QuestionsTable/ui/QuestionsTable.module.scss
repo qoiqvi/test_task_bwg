@@ -71,16 +71,10 @@ tr:nth-child(even) {
 	width: 250px;
 }
 
-// tr:hover {
-// 	transform: scale(1.01);
-// }
-
 .trigger {
 	width: 100px;
-	// background-color: transparent;
+	background-color: transparent;
 	height: 100px;
-	z-index: 3;
-	background-color: aqua;
 }
 
 .skeleton {

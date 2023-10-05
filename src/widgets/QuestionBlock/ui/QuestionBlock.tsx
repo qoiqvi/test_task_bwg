@@ -4,6 +4,7 @@ import { memo, useEffect, useState } from "react"
 import { Question } from "entities/Question"
 import { fetchQuestionById } from "../model/fetchQuestionById"
 import { ParsedBlock } from "entities/ParsedBlock"
+import { UserInfoBlock } from "entities/User"
 
 export interface QuestionBlockProps {
 	className?: string
@@ -23,10 +24,16 @@ export const QuestionBlock = memo((props: QuestionBlockProps) => {
 		<div className={classNames(cls.QuestionBlock, {}, [className])}>
 			<div className={cls.question}>
 				{question ? (
-					<ParsedBlock
-						isLoading={isQuestionLoading}
-						entity={question}
-					/>
+					<>
+						<UserInfoBlock
+							user={question.owner}
+							isLoading={isQuestionLoading}
+						/>
+						<ParsedBlock
+							isLoading={isQuestionLoading}
+							entity={question}
+						/>
+					</>
 				) : null}
 			</div>
 		</div>

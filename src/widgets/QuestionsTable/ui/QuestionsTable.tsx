@@ -12,6 +12,9 @@ import { Avatar } from "shared/ui/Avatar"
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll/useInfiniteScroll"
 import { fetchNexthQuestions } from "../model/services/fetchNextQuestions"
 import { Spinner } from "shared/ui/Spinner"
+import parser from "html-react-parser"
+import { useDispatch } from "react-redux"
+import { changePage } from "widgets/SortAndSearch"
 
 export interface QuestionsTableProps {
 	className?: string
@@ -25,23 +28,25 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 	const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
 	const hasMore = useRef(true)
 	const params = useAppSelector((state) => state.queryParams)
+	const dispatch = useDispatch()
 
-	// const onScrollEnd = useCallback(() => {
-	// 	if (!isLoading) {
-	// 		fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
-	// 			setQuestions((prev) => (prev.length ? [...prev, data.items] : data))
-	// 		)
-	// 	}
-	// }, [isLoading, params])
+	const onScrollEnd = useCallback(() => {
+		if (!isLoading) {
+			fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
+				setQuestions((prev) => [...prev, ...data.items])
+			)
+		}
+	}, [isLoading, params])
 
-	// useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
+	useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
 
-	// useEffect(() => {
-	// 	fetchQuestionsByParams({ params, setIsLoading }).then((data) => {
-	// 		hasMore.current = data.has_more
-	// 		setQuestions(data.items)
-	// 	})
-	// }, [params])
+	useEffect(() => {
+		fetchQuestionsByParams({ params, setIsLoading }).then((data) => {
+			hasMore.current = data.has_more
+			setQuestions(data?.items)
+		})
+		console.log("fetch")
+	}, [params])
 
 	return (
 		<div
@@ -49,7 +54,7 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 			ref={wrapperRef}
 		>
 			<div className={cls.QuestionsTable}>
-				{/* <table className={cls.table}>
+				<table className={cls.table}>
 					<thead>
 						<tr>
 							<th>Автор</th>
@@ -58,30 +63,25 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 							<th>Тэги</th>
 						</tr>
 					</thead>
+
 					<tbody>
-						{questions?.length > 1
+						{questions?.length > 0
 							? questions.map((question) => (
 									<tr key={question.question_id}>
 										<td>
 											<div className={cls.owner}>
 												<Avatar
-													src={question.owner?.profile_image || ""}
+													src={question.owner.profile_image || ""}
 													alt="profile icon"
 													size={80}
 												/>
-												<p
-													className={cls.nickname}
-													dangerouslySetInnerHTML={{
-														__html: question.owner?.display_name,
-													}}
-												/>
+												<p className={cls.nickname}>{parser(question.owner.display_name)}</p>
 											</div>
 										</td>
 										<td>
-											<AppLink
-												to={`${RoutePath.question}${question.question_id}`}
-												dangerouslySetInnerHTML={{ __html: question.title }}
-											/>
+											<AppLink to={`${RoutePath.question}/${question.question_id}`}>
+												{parser(question.title)}
+											</AppLink>
 										</td>
 										<td>
 											{question.answer_count > 0
@@ -100,25 +100,24 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 							  ))
 							: null}
 					</tbody>
-				</table> */}
-				{isLoading ? <Spinner /> : null}
+				</table>
 			</div>
-			<div
+			{/* <div
 				style={{ display: isLoading ? "none" : "block" }}
 				className={cls.trigger}
 				ref={triggerRef}
-			/>
+			/> */}
 		</div>
 	)
 })
 
-{
-	/* <div className={classNames(cls.QuestionsTable, {}, [className])}>
-				<div className={cls.table}>
-					<Skeleton
-						className={cls.skeleton}
-						border="30px"
-					/>
-				</div>
-			</div> */
-}
+// const onScrollEnd = useCallback(() => {
+// 	if (questions.length && hasMore && !isLoading) {
+// 		dispatch(changePage(params.page + 1))
+// 		fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
+// 			setQuestions((prev) => (prev.length ? [...prev, ...data.items] : data))
+// 		)
+// 	}
+// }, [dispatch, isLoading, params, questions.length])
+
+// useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
