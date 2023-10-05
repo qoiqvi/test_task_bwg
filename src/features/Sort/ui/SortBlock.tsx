@@ -1,10 +1,10 @@
 import { classNames } from "shared/lib/classNames/classNames"
 import cls from "./SortBlock.module.scss"
 import { memo, useCallback } from "react"
-import { sortFieds } from "../model/config"
+import { pageSize, sortFieds } from "../model/config"
 import { useAppSelector } from "shared/hooks/useAppSelector"
 import { useDispatch } from "react-redux"
-import { SortBy, SortOrder, changeOrder, changeSort } from "widgets/SortAndSearch"
+import { SortBy, SortOrder, changeOrder, changePageSize, changeSort } from "widgets/SortAndSearch"
 import { Select } from "shared/ui/Listbox"
 import { Button } from "shared/ui/Button"
 import { ArrowIcon } from "shared/icons/ArrowIcon"
@@ -16,11 +16,12 @@ export interface SortBlockProps {
 export const SortBlock = memo((props: SortBlockProps) => {
 	const { className } = props
 	const sort = useAppSelector((state) => state.queryParams.sort)
+	const pagesize = useAppSelector((state) => state.queryParams.pagesize)
 	const dispatch = useDispatch()
 
 	const onChangeSortField = useCallback(
-		(value: SelectOptions) => {
-			dispatch(changeSort(value.value as SortBy))
+		(option: SelectOptions) => {
+			dispatch(changeSort(option.value as SortBy))
 		},
 		[dispatch]
 	)
@@ -28,6 +29,13 @@ export const SortBlock = memo((props: SortBlockProps) => {
 	const onChangeSortOrder = useCallback(
 		(value: SortOrder) => {
 			dispatch(changeOrder(value))
+		},
+		[dispatch]
+	)
+
+	const onChangePageSize = useCallback(
+		(option: SelectOptions) => {
+			dispatch(changePageSize(option.value as string))
 		},
 		[dispatch]
 	)
@@ -41,6 +49,12 @@ export const SortBlock = memo((props: SortBlockProps) => {
 				value={sort}
 				placeholder="Сортировать по"
 				onSelect={onChangeSortField}
+			/>
+			<Select
+				options={pageSize}
+				value={pagesize}
+				placeholder="Показать"
+				onSelect={onChangePageSize}
 			/>
 			<Button
 				square

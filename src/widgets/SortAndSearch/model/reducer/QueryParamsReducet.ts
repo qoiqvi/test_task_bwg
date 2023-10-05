@@ -4,8 +4,8 @@ import { Action, QueryParamsStateSchema } from "../types/QueryParamsStateSchema"
 const initialState: QueryParamsStateSchema = {
 	order: "desc",
 	sort: "activity",
-	page: 1,
-	pagesize: 15,
+	page: "1",
+	pagesize: "15",
 	title: "",
 }
 
@@ -19,6 +19,8 @@ export const QueryParamsReducer = (state = initialState, action: Action): QueryP
 			return { ...state, sort: action.payload }
 		case ActionTypes.CHANGE_PAGE:
 			return { ...state, page: action.payload }
+		case ActionTypes.CHANGE_PAGESIZE:
+			return { ...state, pagesize: action.payload }
 		default:
 			return state
 	}

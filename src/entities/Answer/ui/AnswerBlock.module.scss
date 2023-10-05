@@ -1,0 +1,11 @@
+.AnswerBlock {
+	border-bottom: 3px solid var(--accent-color);
+}
+
+.answerContainer {
+	margin: 50px 180px;
+}
+
+.AnswerBlock:last-child {
+	border-bottom: none;
+}

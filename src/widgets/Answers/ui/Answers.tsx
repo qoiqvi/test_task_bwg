@@ -21,14 +21,17 @@ export const Answers = memo((props: AnswerProps) => {
 	}, [id])
 
 	return (
-		<div className={classNames(cls.Answers, {}, [className])}>
-			{answers?.map((answer) => (
-				<AnswerBlock
-					isLoading={isAnswersLoading}
-					answer={answer}
-					key={answer.answer_id}
-				/>
-			))}
+		<div>
+			<h1 className={cls.title}>Ответы:</h1>
+			<div className={classNames(cls.Answers, {}, [className])}>
+				{answers?.map((answer) => (
+					<AnswerBlock
+						isLoading={isAnswersLoading}
+						answer={answer}
+						key={answer.answer_id}
+					/>
+				))}
+			</div>
 		</div>
 	)
 })

@@ -30,7 +30,6 @@ export const ParsedBlock = memo((props: ParsedBlockProps) => {
 
 	return (
 		<div className={classNames(cls.ParsedBlock, {}, [className])}>
-			{entity ? <h4 className={cls.creation}>{getDate(entity?.creation_date)}</h4> : null}
 			<h1 className={cls.title}>{entity?.title}</h1>
 			{entity?.body ? <div>{parse(entity.body)}</div> : null}
 			<div className={cls.tagsContainer}>

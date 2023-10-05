@@ -1,6 +1,6 @@
 import { classNames } from "shared/lib/classNames/classNames"
 import cls from "./Page.module.scss"
-import { MutableRefObject, ReactNode, memo, useRef } from "react"
+import { MutableRefObject, ReactNode, useRef } from "react"
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll/useInfiniteScroll"
 
 export interface PageProps {

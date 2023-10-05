@@ -1,10 +1,17 @@
 .Answers {
 	width: 1030px;
 	min-width: 400px;
-	margin: 140px 200px;
+	margin: 50px 200px;
 	background-color: var(--bg-primary);
+	border-radius: 30px;
 }
 
 .question {
 	margin: 50px 180px;
+}
+
+.title {
+	margin: 0 200px 10px;
+	font-size: 24px;
+	font-weight: 600;
 }

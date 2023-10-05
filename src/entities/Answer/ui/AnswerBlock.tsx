@@ -20,10 +20,12 @@ export const AnswerBlock = memo((props: AnswerBlockProps) => {
 				user={answer.owner}
 				isLoading={isLoading}
 			/>
-			<ParsedBlock
-				entity={answer}
-				isLoading={isLoading}
-			/>
+			<div className={cls.answerContainer}>
+				<ParsedBlock
+					entity={answer}
+					isLoading={isLoading}
+				/>
+			</div>
 		</div>
 	)
 })

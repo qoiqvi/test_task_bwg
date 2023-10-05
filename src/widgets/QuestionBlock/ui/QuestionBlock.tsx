@@ -21,18 +21,21 @@ export const QuestionBlock = memo((props: QuestionBlockProps) => {
 	}, [id])
 
 	return (
-		<div className={classNames(cls.QuestionBlock, {}, [className])}>
-			<div className={cls.question}>
+		<div>
+			<h1 className={cls.title}>Вопрос:</h1>
+			<div className={classNames(cls.QuestionBlock, {}, [className])}>
 				{question ? (
 					<>
 						<UserInfoBlock
-							user={question.owner}
+							user={question?.owner}
 							isLoading={isQuestionLoading}
 						/>
-						<ParsedBlock
-							isLoading={isQuestionLoading}
-							entity={question}
-						/>
+						<div className={cls.question}>
+							<ParsedBlock
+								isLoading={isQuestionLoading}
+								entity={question}
+							/>
+						</div>
 					</>
 				) : null}
 			</div>

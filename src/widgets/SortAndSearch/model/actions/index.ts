@@ -5,6 +5,7 @@ export enum ActionTypes {
 	CHANGE_SORT = "CHANGE_SORT",
 	CHANGE_PAGE = "CHANGE_PAGE",
 	CHANGE_TITLE = "CHANGE_TITLE",
+	CHANGE_PAGESIZE = "CHANGE_PAGESIZE",
 }
 
 export const changeOrder = (order: SortOrder) => ({
@@ -17,7 +18,7 @@ export const changeSort = (sort: SortBy) => ({
 	payload: sort,
 })
 
-export const changePage = (page: number) => ({
+export const changePage = (page: string) => ({
 	type: ActionTypes.CHANGE_PAGE,
 	payload: page,
 })
@@ -25,4 +26,9 @@ export const changePage = (page: number) => ({
 export const changeTitle = (title: string) => ({
 	type: ActionTypes.CHANGE_TITLE,
 	payload: title,
+})
+
+export const changePageSize = (num: string) => ({
+	type: ActionTypes.CHANGE_PAGESIZE,
+	payload: num,
 })

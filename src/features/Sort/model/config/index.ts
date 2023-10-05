@@ -16,3 +16,22 @@ export const sortFieds: SelectOptions[] = [
 		content: "По дате создания",
 	},
 ]
+
+export const pageSize: SelectOptions[] = [
+	{
+		value: "10",
+		content: "10",
+	},
+	{
+		value: "15",
+		content: "15",
+	},
+	{
+		value: "25",
+		content: "25",
+	},
+	{
+		value: "50",
+		content: "50",
+	},
+]

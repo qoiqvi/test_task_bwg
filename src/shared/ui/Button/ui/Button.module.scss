@@ -1,6 +1,5 @@
 .Button {
 	cursor: pointer;
-
 	&:hover {
 		opacity: 0.7;
 		cursor: pointer;
@@ -18,8 +17,8 @@
 
 .outlined {
 	padding: 10px 15px;
-	border: 2px solid var(--primary-color);
-	color: var(--primary-color);
+	border: 2px solid var(--accent-color);
+	// color: var(--primary-color);
 	background: none;
 }
 
@@ -64,15 +63,15 @@
 }
 
 .size_m {
-	font: var(--font-m);
+	font-size: 18px;
 }
 
 .size_l {
-	font: var(--font-l);
+	font-size: 20px;
 }
 
 .size_xl {
-	font: var(--font-xl);
+	font-size: 22px;
 }
 
 .disabled {

@@ -11,6 +11,6 @@ export interface QueryParamsStateSchema {
 	order: SortOrder
 	sort: SortBy
 	title: string
-	page: number
-	pagesize: number
+	page: string
+	pagesize: string
 }

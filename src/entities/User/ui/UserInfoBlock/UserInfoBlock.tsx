@@ -27,11 +27,6 @@ export const UserInfoBlock = memo((props: UserInfoBlockProps) => {
 						width={100}
 						className={cls.nickname}
 					/>
-					<Skeleton
-						height={20}
-						width={80}
-						className={cls.type}
-					/>
 				</div>
 			</div>
 		)
@@ -43,10 +38,7 @@ export const UserInfoBlock = memo((props: UserInfoBlockProps) => {
 				alt="profile_image"
 				size={85}
 			/>
-			<div className={cls.textInfo}>
-				<h1 className={cls.nickname}>{user.display_name}</h1>
-				<h4 className={cls.type}>{user.user_type}</h4>
-			</div>
+			<h1 className={cls.nickname}>Автор: {user.display_name}</h1>
 		</div>
 	)
 })

@@ -1,6 +1,6 @@
 import { classNames } from "shared/lib/classNames/classNames"
 import cls from "./QuestionsTable.module.scss"
-import { MutableRefObject, memo, useCallback, useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { Tag } from "entities/Tag"
 import { RoutePath } from "shared/config/routeConfig/routeConfig"
 import { AppLink } from "shared/ui/Link"
@@ -9,10 +9,8 @@ import { useAppSelector } from "shared/hooks/useAppSelector"
 import { fetchQuestionsByParams } from "../model/services/fetchQuestionsByParams"
 import { sklonenie } from "../model/utils/sklonenie/sklonenie"
 import { Avatar } from "shared/ui/Avatar"
-import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll/useInfiniteScroll"
-import { fetchNexthQuestions } from "../model/services/fetchNextQuestions"
 import parser from "html-react-parser"
-import { useDispatch } from "react-redux"
+import { Spinner } from "shared/ui/Spinner"
 
 export interface QuestionsTableProps {
 	className?: string
@@ -22,35 +20,31 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 	const { className } = props
 	const [questions, setQuestions] = useState<ShortQuestion[]>([])
 	const [isLoading, setIsLoading] = useState(false)
-	const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>
-	const triggerRef = useRef() as MutableRefObject<HTMLDivElement>
 	const hasMore = useRef(true)
 	const params = useAppSelector((state) => state.queryParams)
-	const dispatch = useDispatch()
-
-	// const onScrollEnd = useCallback(() => {
-	// 	if (!isLoading && hasMore && questions?.length) {
-	// 		fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
-	// 			setQuestions((prev) => [...prev, ...data.items])
-	// 		)
-	// 	}
-	// }, [isLoading, params, questions.length])
-
-	// useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
+	const page = useAppSelector((state) => state.queryParams.page)
+	const sort = useAppSelector((state) => state.queryParams.sort)
+	const title = useAppSelector((state) => state.queryParams.title)
+	const pagesize = useAppSelector((state) => state.queryParams.pagesize)
+	const order = useAppSelector((state) => state.queryParams.order)
 
 	useEffect(() => {
-		fetchQuestionsByParams({ params, setIsLoading }).then((data) => {
+		fetchQuestionsByParams({ params: { page, sort, title, pagesize, order }, setIsLoading }).then((data) => {
 			hasMore.current = data.has_more
 			setQuestions(data?.items)
 		})
-		console.log("fetch")
-	}, [params])
+	}, [order, page, pagesize, sort, title])
+
+	if (isLoading) {
+		return (
+			<div className={cls.spinnerCont}>
+				<Spinner />
+			</div>
+		)
+	}
 
 	return (
-		<div
-			className={classNames(cls.container, {}, [className])}
-			ref={wrapperRef}
-		>
+		<div className={classNames(cls.container, {}, [className])}>
 			<div className={cls.QuestionsTable}>
 				<table className={cls.table}>
 					<thead>
@@ -81,7 +75,7 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 												{parser(question.title)}
 											</AppLink>
 										</td>
-										<td>
+										<td className={cls.answers}>
 											{question.answer_count > 0
 												? sklonenie(question.answer_count)
 												: `Еще никто не ответил`}
@@ -100,22 +94,6 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 					</tbody>
 				</table>
 			</div>
-			<div
-				style={{ display: isLoading ? "none" : "block" }}
-				className={cls.trigger}
-				ref={triggerRef}
-			/>
 		</div>
 	)
 })
-
-// const onScrollEnd = useCallback(() => {
-// 	if (questions.length && hasMore && !isLoading) {
-// 		dispatch(changePage(params.page + 1))
-// 		fetchNexthQuestions({ params, hasMore: hasMore.current, isLoading, setIsLoading }).then((data) =>
-// 			setQuestions((prev) => (prev.length ? [...prev, ...data.items] : data))
-// 		)
-// 	}
-// }, [dispatch, isLoading, params, questions.length])
-
-// useInfiniteScroll({ callback: onScrollEnd, wrapperRef, triggerRef })
