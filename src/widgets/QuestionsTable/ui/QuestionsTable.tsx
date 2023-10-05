@@ -21,7 +21,6 @@ export const QuestionsTable = memo((props: QuestionsTableProps) => {
 	const [questions, setQuestions] = useState<ShortQuestion[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const hasMore = useRef(true)
-	const params = useAppSelector((state) => state.queryParams)
 	const page = useAppSelector((state) => state.queryParams.page)
 	const sort = useAppSelector((state) => state.queryParams.sort)
 	const title = useAppSelector((state) => state.queryParams.title)
